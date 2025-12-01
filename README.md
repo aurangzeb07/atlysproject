@@ -17,7 +17,7 @@ The app follows **MVVM (Model-View-ViewModel)** architecture pattern:
 
 - **Data Layer**: 
   - `MovieRepository`: Handles data fetching from API and local database
-  - `TmdbApiService`: Retrofit interface for TMDB API
+  - `ApiService`: Retrofit interface for TMDB API
   - `MovieDatabase`: Room database for offline caching
   - `MovieDao`: Data access object for database operations
 
@@ -26,8 +26,8 @@ The app follows **MVVM (Model-View-ViewModel)** architecture pattern:
   - `MovieDetailViewModel`: Manages UI state for movie detail screen
 
 - **UI Layer**:
-  - `MovieListScreen`: Displays grid of movies with search
-  - `MovieDetailScreen`: Shows detailed movie information
+   - `MovieListViewModel` & `MovieDetailViewModel`: Manage UI state for the screens
+  - `MovieListScreen` & `MovieDetailScreen`: Composable screens that display the UI
   - `NavGraph`: Handles navigation between screens
 
 ## Setup Instructions
@@ -39,10 +39,10 @@ The app follows **MVVM (Model-View-ViewModel)** architecture pattern:
    - Generate an API key
 
 2. **Configure API Key**:
-   - Open `app/src/main/java/com/atlys/movieappassignment/util/Config.kt`
-   - Replace `YOUR_API_KEY_HERE` with your actual TMDB API key:
-   ```kotlin
-   const val TMDB_API_KEY = "your_actual_api_key_here"
+   - Open `local.properties` file in the root of the project.
+   - Add your TMDB API key in the following format:
+   ```properties
+   TMDB_API_KEY="your_actual_api_key_here"
    ```
 
 3. **Build and Run**:
@@ -63,12 +63,13 @@ The app follows **MVVM (Model-View-ViewModel)** architecture pattern:
 ## Project Structure
 
 ```
-app/src/main/java/com/atlys/movieappassignment/
+app/src/main/java/com/atlys/movieatlysassignment/
 ├── data/
 │   ├── api/              # API service and configuration
 │   ├── database/         # Room database, DAO, entities
 │   ├── model/            # Data models
 │   └── repository/       # Repository pattern implementation
+|── di/                   # Dependency injection modules
 ├── ui/
 │   ├── components/       # Reusable UI components
 │   ├── navigation/       # Navigation setup
@@ -76,7 +77,8 @@ app/src/main/java/com/atlys/movieappassignment/
 │   ├── theme/            # Theme and styling
 │   └── viewmodel/        # ViewModels
 ├── util/                 # Utility classes and constants
-└── MainActivity.kt       # Main activity
+├── MainActivity.kt       # Main activity
+└── MovieApp.kt           # Application class
 ```
 
 ## Key Features Implementation
